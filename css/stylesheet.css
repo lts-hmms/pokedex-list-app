@@ -1,0 +1,31 @@
+@font-face {
+	font-family: 'akzidenzgroteskregular';
+	src: url('fonts/akzidenz-grotesk-roman-webfont.woff2') format('woff2'),
+		url('fonts/akzidenz-grotesk-roman-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'akzidenzgrotesklight';
+	src: url('fonts/akzidenz-grotesk-light-webfont.woff2') format('woff2'),
+		url('fonts/akzidenz-grotesk-light-webfont.woff') format('woff');
+	font-weight: lighter;
+	font-style: normal;
+}
+
+body {
+	background: #ffffff;
+	color: #000000;
+	font-family: 'akzidenzgroteskregular';
+	line-height: 1.46;
+	font-size: 24px;
+}
+
+header {
+	background-color: #000000;
+	color: #ffffff;
+	padding: 20px;
+	font-size: 26px;
+	font-family: 'akzidenzgrotesklight';
+}
