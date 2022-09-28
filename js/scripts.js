@@ -23,13 +23,18 @@ let a24Repository = (function() {
 			name: 'Moonlight',
 			year: 2016,
 			length: 111,
-			types: [
+			genre: [
 				'Drama'
 			]
 		}
 	];
+	// function that adds a movie
 	function add(movie) {
-		a24List.push(movie);
+		if (typeof movie === 'object' && 'name' in movie && 'year' in movie && 'length' in movie && 'genre' in movie) {
+			a24List.push(movie);
+		} else {
+			return 'invalid input';
+		}
 	}
 
 	function getAll() {
