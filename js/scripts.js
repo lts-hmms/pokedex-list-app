@@ -28,7 +28,7 @@ let a24Repository = (function() {
 			]
 		}
 	];
-	// function that adds a movie
+	// function for adding a movie
 	function add(movie) {
 		if (typeof movie === 'object' && 'name' in movie && 'year' in movie && 'length' in movie && 'genre' in movie) {
 			a24List.push(movie);
@@ -36,14 +36,20 @@ let a24Repository = (function() {
 			return 'invalid input';
 		}
 	}
-
+	// function to show all movies
 	function getAll() {
 		return a24List;
 	}
 
+	// function to find a specific movie
+	function findMovie() {
+		a24List.filter((movie) => movie.name === 'Moonlight');
+	}
+
 	return {
 		add: add,
-		getAll: getAll
+		getAll: getAll,
+		findMovie: findMovie
 	};
 })();
 
