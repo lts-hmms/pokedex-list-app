@@ -35,12 +35,17 @@ let a24Repository = (function() {
 	function getAll() {
 		return a24List;
 	}
+
+	return {
+		add: add,
+		getAll: getAll
+	};
 })();
 
 /*iterates over a24List and writes down each name and length,
 when length is over 100 (minutes), then "Wow, it's long" is added. */
 
-a24List.forEach(function(movie) {
+a24Repository.getAll().forEach(function(movie) {
 	if (movie.length >= 100) {
 		document.write(`<li>
 			${movie.name} is ${movie.length} minutes long – Wow, that\'s long!</li>`);
