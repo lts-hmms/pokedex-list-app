@@ -2,7 +2,7 @@ let a24Repository = (function() {
 	let a24List = [
 		{
 			name: 'The Witch',
-			year: 2015,
+			year: '2015',
 			length: 92,
 			genre: [
 				'Drama',
@@ -21,7 +21,7 @@ let a24Repository = (function() {
 		},
 		{
 			name: 'Moonlight',
-			year: 2016,
+			year: '2016',
 			length: 111,
 			genre: [
 				'Drama'
@@ -42,8 +42,8 @@ let a24Repository = (function() {
 	}
 
 	// function to find a specific movie
-	function findMovie() {
-		a24List.filter((movie) => movie.name === 'Moonlight');
+	function findMovie(userInput) {
+		return movieList.filter((movie) => movie.name.toLowerCase() === userInput.toLowerCase());
 	}
 
 	return {
