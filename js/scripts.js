@@ -1,5 +1,5 @@
 let a24Repository = (function() {
-	let movieList = [
+	let a24List = [
 		{
 			name: 'The Witch',
 			year: 2015,
@@ -31,20 +31,19 @@ let a24Repository = (function() {
 	// function for adding a movie
 	function add(movie) {
 		if (typeof movie === 'object' && 'name' in movie && 'year' in movie && 'length' in movie && 'genre' in movie) {
-			movieList.push(movie);
+			a24List.push(movie);
 		} else {
 			return 'invalid input';
 		}
 	}
 	// function to show all movies
 	function getAll() {
-		return movieList;
+		return a24List;
 	}
 
 	// function to find a specific movie
 	function findMovie() {
-		let userInput = '';
-		let result = movieList.filter((movie) => movie.name.toLowerCase() === userInput.toLowerCase());
+		a24List.filter((movie) => movie.name === 'Moonlight');
 	}
 
 	return {
@@ -54,7 +53,7 @@ let a24Repository = (function() {
 	};
 })();
 
-/*iterates over movieList and writes down each name and length,
+/*iterates over a24List and writes down each name and length,
 when length is over 100 (minutes), then "Wow, it's long" is added. */
 
 a24Repository.getAll().forEach(function(movie) {
