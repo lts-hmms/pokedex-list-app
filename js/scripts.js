@@ -43,7 +43,8 @@ let a24Repository = (function() {
 
 	// function to find a specific movie
 	function findMovie() {
-		movieList.filter((movie) => movie.name === 'Moonlight');
+		let userInput = '';
+		let result = movieList.filter((movie) => movie.name.toLowerCase() === userInput.toLowerCase());
 	}
 
 	return {
