@@ -57,10 +57,5 @@ let a24Repository = (function() {
 when length is over 100 (minutes), then "Wow, it's long" is added. */
 
 a24Repository.getAll().forEach(function(movie) {
-	if (movie.length >= 100) {
-		document.write(`<li>
-			${movie.name} is ${movie.length} minutes long – Wow, that\'s long!</li>`);
-	} else {
-		document.write(`<li>${movie.name} is ${movie.length} minutes long.</li>`);
-	}
+	let list = document.querySelector('.movie-list');
 });
