@@ -1,6 +1,6 @@
 //IIFE
 let a24Repository = (function() {
-	let movieList = [
+	let a24List = [
 		{
 			name: 'The Witch',
 			year: '2015',
@@ -32,14 +32,14 @@ let a24Repository = (function() {
 	// function for adding a movie
 	function add(movie) {
 		if (typeof movie === 'object' && 'name' in movie && 'year' in movie && 'length' in movie && 'genre' in movie) {
-			movieList.push(movie);
+			a24List.push(movie);
 		} else {
 			return 'invalid input';
 		}
 	}
 	// function to show all movies
 	function getAll() {
-		return movieList;
+		return a24List;
 	}
 
 	// function to find a specific movie
