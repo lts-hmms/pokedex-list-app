@@ -1,3 +1,4 @@
+//IIFE
 let a24Repository = (function() {
 	let movieList = [
 		{
@@ -46,16 +47,35 @@ let a24Repository = (function() {
 		return movieList.filter((movie) => movie.name.toLowerCase() === userInput.toLowerCase());
 	}
 
+	//function which creates buttons for each movie including showDetails of movie by click
+	function addListItem(movie) {
+		let list = document.querySelector('.movie-list');
+		let listItem = document.createElement('li');
+		let button = document.createElement('button');
+		button.innerText = movie.name;
+		button.classList.add('name-button');
+		listItem.appendChild(button);
+		list.appendChild(listItem);
+		list.classList.add('list-class');
+		button.classList.add('button-class');
+		button.addEventListener('click', function() {
+			showDetails(movie);
+		});
+	}
+
+	function showDetails(movie) {
+		console.log(movie);
+	}
+
 	return {
 		add: add,
 		getAll: getAll,
-		findMovie: findMovie
+		findMovie: findMovie,
+		addListItem: addListItem,
+		showDetails: showDetails
 	};
 })();
 
-/*iterates over movieList and writes down each name and length,
-when length is over 100 (minutes), then "Wow, it's long" is added. */
-
 a24Repository.getAll().forEach(function(movie) {
-	let list = document.querySelector('.movie-list');
+	a24Repository.addListItem(movie);
 });
