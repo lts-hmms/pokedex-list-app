@@ -29,3 +29,18 @@ header {
 	font-size: 26px;
 	font-family: 'akzidenzgrotesklight';
 }
+
+.list-class {
+	list-style: none;
+}
+
+.button-class {
+	background-color: #000000;
+	color: #ffffff;
+	border: none;
+	font-family: 'akzidenzgrotesklight';
+	font-size: 18px;
+	text-transform: uppercase;
+	margin: 8px 5px;
+	padding: 5px 20px 5px 20px;
+}
