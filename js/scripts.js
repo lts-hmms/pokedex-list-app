@@ -19,7 +19,8 @@ let a24Repository = (function() {
 			genre: [
 				'Comedy',
 				'Drama'
-			]
+			],
+			URL: 'https://i0.wp.com/teaser-trailer.com/wp-content/uploads/Lady-Bird-New-Film-poster.jpg'
 		},
 		{
 			name: 'Moonlight',
@@ -27,7 +28,8 @@ let a24Repository = (function() {
 			length: 111,
 			genre: [
 				'Drama'
-			]
+			],
+			URL: 'https://www.cineworld.co.uk/xmedia-cw/repo/feats/posters/HO00004174.jpg'
 		}
 	];
 	// function for adding a movie
@@ -68,34 +70,25 @@ let a24Repository = (function() {
 		console.log(movie);
 	}
 
-	// two approaches for image function, both not working
-	/* function images() {
+	// image function
+	function images(image) {
 		let img = document.createElement('img');
-		img.src = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png';
-		let src = document.getElementsByID('imageId');
-		src.appendChild(img);
+		img.src = image;
+		let listItem = document.querySelector('.list-class');
+		listItem.appendChild(img);
 	}
-	*/
-
-	/*function images() {
-		let img = new Image();
-		let div = document.getElementById('imageId');
-		img.onload = function() {
-			div.appendChild(img);
-		};
-		img.src = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png';
-	}
-	*/
 
 	return {
 		add: add,
 		getAll: getAll,
 		findMovie: findMovie,
 		addListItem: addListItem,
-		showDetails: showDetails
+		showDetails: showDetails,
+		images: images
 	};
 })();
 
 a24Repository.getAll().forEach(function(movie) {
 	a24Repository.addListItem(movie);
+	a24Repository.images(movie.URL);
 });
