@@ -1,94 +1,116 @@
 //IIFE
 let a24Repository = (function() {
-	let movieList = [
-		{
-			name: 'The Witch',
-			year: '2015',
-			length: 92,
-			genre: [
-				'Drama',
-				'Fantasy',
-				'Horror'
-			],
-			URL: 'https://de.web.img3.acsta.net/c_310_420/pictures/16/03/21/12/29/404212.jpg'
-		},
-		{
-			name: 'Lady Bird',
-			year: '2017',
-			length: 94,
-			genre: [
-				'Comedy',
-				'Drama'
-			],
-			URL: 'https://i0.wp.com/teaser-trailer.com/wp-content/uploads/Lady-Bird-New-Film-poster.jpg'
-		},
-		{
-			name: 'Moonlight',
-			year: '2016',
-			length: 111,
-			genre: [
-				'Drama'
-			],
-			URL: 'https://www.cineworld.co.uk/xmedia-cw/repo/feats/posters/HO00004174.jpg'
-		}
-	];
-	// function for adding a movie
-	function add(movie) {
-		if (typeof movie === 'object' && 'name' in movie && 'year' in movie && 'length' in movie && 'genre' in movie) {
-			movieList.push(movie);
+	let pokemonList = [];
+	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=20';
+
+	function loadingMessage() {
+		let loadImg = document.createElement('image');
+		loadImg.src = 'https://www.sketchup.com/sites/www.sketchup.com/modules/license_wizard_green/images/loading.gif';
+		let divItem = document.querySelector('.load');
+		divItem.appendChild(loadImg);
+	}
+
+	function hidingMessage() {
+		document.querySelector('#body').classList.remove('load');
+	}
+
+	// function for adding a pokemon
+	function add(pokemon) {
+		if (typeof pokemon === 'object' && 'name' in pokemon) {
+			pokemonList.push(pokemon);
 		} else {
 			return 'invalid input';
 		}
 	}
-	// function to show all movies
+	// function to show all pokemons
 	function getAll() {
-		return movieList;
+		return pokemonList;
 	}
 
-	// function to find a specific movie
-	function findMovie(userInput) {
-		return movieList.filter((movie) => movie.name.toLowerCase() === userInput.toLowerCase());
+	// function to find a specific pokemon
+	function findPokemon(userInput) {
+		return pokemonList.filter((pokemon) => pokemon.name.toLowerCase() === userInput.toLowerCase());
 	}
 
-	//function which creates buttons for each movie including showDetails of movie by click
-	function addListItem(movie) {
-		let list = document.querySelector('.movie-list');
+	//function which creates buttons for each pokemon including showDetails of pokemon by click
+	function addListItem(pokemon) {
+		let list = document.querySelector('.pokemon-list');
 		let listItem = document.createElement('li');
 		let button = document.createElement('button');
-		button.innerText = movie.name;
+		button.innerText = pokemon.name;
 		button.classList.add('name-button');
 		listItem.appendChild(button);
 		list.appendChild(listItem);
 		list.classList.add('list-class');
 		button.classList.add('button-class');
-		button.addEventListener('click', function() {
-			showDetails(movie);
+		button.addEventListener('click', function(event) {
+			showDetails(pokemon);
 		});
 	}
 
-	function showDetails(movie) {
-		console.log(movie);
+	function loadList() {
+		loadingMessage();
+		return fetch(apiUrl)
+			.then(function(response) {
+				hidingMessage();
+				return response.json();
+			})
+			.then(function(json) {
+				json.results.forEach(function(item) {
+					let pokemon = {
+						name: item.name,
+						detailsUrl: item.url
+					};
+					add(pokemon);
+					console.log(pokemon);
+				});
+			})
+			.catch(function(e) {
+				hidingMessage();
+				console.error(e);
+			});
 	}
 
-	// image function
-	function images(image) {
-		let img = document.createElement('img');
-		img.src = image;
-		let listItem = document.querySelector('.list-class');
-		listItem.appendChild(img);
+	function loadDetails(item) {
+		loadingMessage();
+		let url = item.detailsUrl;
+		return fetch(url)
+			.then(function(response) {
+				hidingMessage();
+				return response.json();
+			})
+			.then(function(details) {
+				item.imgUrl = details.sprites.front_default;
+				item.height = details.height;
+				item.types = details.types;
+			})
+			.catch(function(e) {
+				hidingMessage();
+				console.error(e);
+			});
+	}
+
+	function showDetails(item) {
+		a24Repository.loadDetails(item).then(function() {
+			console.log(item);
+		});
 	}
 
 	return {
 		add: add,
 		getAll: getAll,
-		findMovie: findMovie,
 		addListItem: addListItem,
+		loadList: loadList,
+		loadDetails: loadDetails,
 		showDetails: showDetails,
-		images: images
+		loadingMessage: loadingMessage,
+		hidingMessage: hidingMessage
 	};
 })();
 
-a24Repository.getAll().forEach(function(movie) {
-	a24Repository.addListItem(movie);
-	a24Repository.images(movie.URL);
+a24Repository.loadList().then(function() {
+	// Now the data is loaded!
+	a24Repository.getAll().forEach(function(pokemon) {
+		a24Repository.addListItem(pokemon);
+	});
 });
