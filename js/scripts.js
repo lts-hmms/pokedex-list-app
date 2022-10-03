@@ -9,7 +9,8 @@ let a24Repository = (function() {
 				'Drama',
 				'Fantasy',
 				'Horror'
-			]
+			],
+			URL: 'https://de.web.img3.acsta.net/c_310_420/pictures/16/03/21/12/29/404212.jpg'
 		},
 		{
 			name: 'Lady Bird',
@@ -66,6 +67,25 @@ let a24Repository = (function() {
 	function showDetails(movie) {
 		console.log(movie);
 	}
+
+	// two approaches for image function, both not working
+	/* function images() {
+		let img = document.createElement('img');
+		img.src = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png';
+		let src = document.getElementsByID('imageId');
+		src.appendChild(img);
+	}
+	*/
+
+	/*function images() {
+		let img = new Image();
+		let div = document.getElementById('imageId');
+		img.onload = function() {
+			div.appendChild(img);
+		};
+		img.src = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png';
+	}
+	*/
 
 	return {
 		add: add,
