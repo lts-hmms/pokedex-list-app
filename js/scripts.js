@@ -14,6 +14,55 @@ let a24Repository = (function() {
 		document.querySelector('#body').classList.remove('load');
 	}
 
+	//modal
+	let modalContainer = document.querySelector('#modal-container');
+
+	//show modal func
+	function showModal(title, text, URL) {
+		modalContainer.innerHTML = '';
+		let modal = document.createElement('div');
+		modal.classList.add('modal');
+
+		//add modal content
+		let closeButtonElement = document.createElement('button');
+		closeButtonElement.classList.add('modal-close');
+		closeButtonElement.innerText = 'x';
+		closeButtonElement.addEventListener('click', hideModal);
+
+		let titleElement = document.createElement('h1');
+		titleElement.innerText = title;
+		let textElement = document.createElement('p');
+		textElement.innerText = text;
+		imgElement = document.createElement('img');
+		imgElement.setAttribute('src', URL);
+		imgElement.setAttribute('width', 150);
+		imgElement.setAttribute('alt', 'Pokemon picture');
+
+		modal.appendChild(closeButtonElement);
+		modal.appendChild(titleElement);
+		modal.appendChild(textElement);
+		modal.appendChild(imgElement);
+		modalContainer.appendChild(modal);
+
+		modalContainer.classList.add('is-visible');
+	}
+	//hide Modal by keydown 'Escape' and click outside modal
+	function hideModal() {
+		modalContainer.classList.remove('is-visible');
+	}
+
+	window.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+			hideModal();
+		}
+	});
+	modalContainer.addEventListener('click', (e) => {
+		let target = e.target;
+		if (target === modalContainer) {
+			hideModal();
+		}
+	});
+
 	// function for adding a pokemon
 	function add(pokemon) {
 		if (typeof pokemon === 'object' && 'name' in pokemon) {
@@ -34,23 +83,26 @@ let a24Repository = (function() {
 
 	function showDetails(item) {
 		loadDetails(item).then(function() {
-			console.log(item);
+			showModal(
+				item.name.toUpperCase(),
+				'Height: ' + item.height + ', ' + 'Weight: ' + item.weight + ', ' + 'Ability: ' + item.ability,
+				item.imgUrl
+			);
 		});
 	}
 
 	//function which creates buttons for each pokemon including showDetails of pokemon by click
-	function addListItem(pokemon) {
+	function addListItem(item) {
 		let list = document.querySelector('.pokemon-list');
 		let listItem = document.createElement('li');
 		let button = document.createElement('button');
-		button.innerText = pokemon.name;
-		button.classList.add('name-button');
+		button.innerText = item.name;
 		listItem.appendChild(button);
 		list.appendChild(listItem);
 		list.classList.add('list-class');
 		button.classList.add('button-class');
-		button.addEventListener('click', function(event) {
-			showDetails(pokemon);
+		button.addEventListener('click', function() {
+			showDetails(item);
 		});
 	}
 
@@ -88,7 +140,8 @@ let a24Repository = (function() {
 			.then(function(details) {
 				item.imgUrl = details.sprites.front_default;
 				item.height = details.height;
-				item.types = details.types;
+				item.weight = details.weight;
+				item.ability = details.abilities[0].ability.name;
 			})
 			.catch(function(e) {
 				hidingMessage();
