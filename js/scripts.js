@@ -4,7 +4,7 @@ let a24Repository = (function() {
 	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=20';
 
 	function loadingMessage() {
-		let loadImg = document.createElement('image');
+		let loadImg = document.createElement('img');
 		loadImg.src = 'https://www.sketchup.com/sites/www.sketchup.com/modules/license_wizard_green/images/loading.gif';
 		let divItem = document.querySelector('.load');
 		divItem.appendChild(loadImg);
@@ -100,11 +100,7 @@ let a24Repository = (function() {
 		add: add,
 		getAll: getAll,
 		addListItem: addListItem,
-		loadList: loadList,
-		loadDetails: loadDetails,
-		showDetails: showDetails,
-		loadingMessage: loadingMessage,
-		hidingMessage: hidingMessage
+		loadList: loadList
 	};
 })();
 
