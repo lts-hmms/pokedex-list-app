@@ -50,3 +50,25 @@ img {
 	width: 130px;
 	margin: 0px 5px 5px 5px;
 }
+
+#modal-container {
+	display: none;
+}
+
+#modal-container.is-visible {
+	position: fixed;
+	padding: 10px;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+	margin: auto;
+	display: inline-block;
+	box-sizing: border-box;
+	background: #000000;
+	padding: 10px;
+	width: 100%;
+}
