@@ -32,6 +32,12 @@ let a24Repository = (function() {
 		return pokemonList.filter((pokemon) => pokemon.name.toLowerCase() === userInput.toLowerCase());
 	}
 
+	function showDetails(item) {
+		loadDetails(item).then(function() {
+			console.log(item);
+		});
+	}
+
 	//function which creates buttons for each pokemon including showDetails of pokemon by click
 	function addListItem(pokemon) {
 		let list = document.querySelector('.pokemon-list');
@@ -88,12 +94,6 @@ let a24Repository = (function() {
 				hidingMessage();
 				console.error(e);
 			});
-	}
-
-	function showDetails(item) {
-		a24Repository.loadDetails(item).then(function() {
-			console.log(item);
-		});
 	}
 
 	return {
