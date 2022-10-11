@@ -84,16 +84,6 @@ let a24Repository = (function() {
 		return pokemonList.filter((pokemon) => pokemon.name.toLowerCase() === userInput.toLowerCase());
 	}
 
-	function showDetails(item) {
-		loadDetails(item).then(function() {
-			showModal(
-				item.name.toUpperCase(),
-				'Height: ' + item.height + ', ' + 'Weight: ' + item.weight + ', ' + 'Ability: ' + item.ability,
-				item.imgUrl
-			);
-		});
-	}
-
 	//function which creates buttons for each pokemon including showDetails of pokemon by click
 	function addListItem(item) {
 		let list = document.querySelector('.pokemon-list');
@@ -108,49 +98,72 @@ let a24Repository = (function() {
 			showDetails(item);
 		});
 	}
-
-	function loadList() {
+	//fetch data from api
+	let loadList = () => {
 		loadingMessage();
 		return fetch(apiUrl)
-			.then(function(response) {
+			.then((response) => {
 				hidingMessage();
+				if (!response.ok) throw new Error(`Status Code Error: ${response.status}`);
 				return response.json();
 			})
-			.then(function(json) {
-				json.results.forEach(function(item) {
+			.then((data) => {
+				data.results.forEach((item) => {
 					let pokemon = {
 						name: item.name,
 						detailsUrl: item.url
 					};
 					add(pokemon);
-					console.log(pokemon);
+					console.log(pokemon); //just for debbuging
 				});
 			})
-			.catch(function(e) {
+			.catch((e) => {
 				hidingMessage();
 				console.error(e);
 			});
-	}
+	};
 
-	function loadDetails(item) {
+	//function for fetching the details from detailsUrl
+	let loadDetails = (pokemon) => {
 		loadingMessage();
-		let url = item.detailsUrl;
-		return fetch(url)
-			.then(function(response) {
+		let nextUrl = pokemon.detailsUrl;
+		return fetch(nextUrl)
+			.then((response) => {
 				hidingMessage();
+				if (!response.ok) throw new Error(`Status Code Error: ${response.status}`);
 				return response.json();
 			})
-			.then(function(details) {
-				item.imgUrl = details.sprites.front_default;
-				item.height = details.height;
-				item.weight = details.weight;
-				item.ability = details.abilities[0].ability.name;
+			.then((data) => {
+				pokemon.id = data.id;
+				pokemon.imgUrl = data.sprites.front_default;
+				pokemon.height = data.height;
+				pokemon.weight = data.weight;
+				pokemon.abilities = data.abilities.map((ability) => ability.ability.name).join(', ');
+				pokemon.types = data.types.map((type) => type.type.name).join(', ');
 			})
-			.catch(function(e) {
-				hidingMessage();
+			.catch((e) => {
+				//hidingMessage();
 				console.error(e);
 			});
-	}
+	};
+
+	// function for displaying details in modal
+	let showDetails = (pokemon) => {
+		loadDetails(pokemon).then(function() {
+			showModal(
+				pokemon.name.toUpperCase(),
+				'Height: ' +
+					pokemon.height +
+					', ' +
+					'Weight: ' +
+					pokemon.weight +
+					', ' +
+					'Ability: ' +
+					pokemon.abilities,
+				pokemon.imgUrl
+			);
+		});
+	};
 
 	return {
 		add: add,
