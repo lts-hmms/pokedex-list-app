@@ -21,14 +21,14 @@ let a24Repository = (function() {
 
 	function addListItem(item) {
 		let list = document.querySelector('.pokemon-list');
-		let listItem = document.createElement('.li');
-		list.appendChild(listItem);
+		let listItem = document.createElement('li');
 		let button = document.createElement('button');
+		listItem.appendChild(button);
 		button.innerText = item.name;
 		listItem.classList.add('button');
-
 		list.classList.add('list-class');
 		button.classList.add('button-class');
+		list.appendChild(listItem);
 		button.addEventListener('click', function() {
 			showDetails(item);
 		});
