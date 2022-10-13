@@ -1,20 +1,32 @@
 .pokemon-list {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .page-container {
-	margin-top: 80px;
+  margin-top: 80px;
 }
 
 .liItem {
-	padding: 5px;
+  padding: 5px;
 }
 
 .button {
-	width: 15rem;
+  width: 15rem;
+}
+
+@media all and (max-width: 800px) {
+  .pokemon-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media all and (max-width: 530px) {
+  .pokemon-list {
+    grid-template-columns: 1fr;
+  }
 }
