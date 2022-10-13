@@ -101,18 +101,6 @@ let a24Repository = (function() {
 	};
 
 	function showModal(item) {
-		let h = $('.modal').height() / 2;
-		$('.modal').css({
-			display: 'flex',
-			top: '50%',
-			left: '50%',
-			position: 'absolute',
-			'margin-left': '-150px',
-			'margin-top': '-' + h + 'px',
-			width: '30rem',
-			height: '40rem'
-		});
-
 		let modalBody = $('.modal-body');
 		let modalTitle = $('.modal-title');
 		//let modalHeader = $('.modal-header');
