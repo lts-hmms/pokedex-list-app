@@ -1,3 +1,7 @@
+body {
+  background: #0000ff;
+}
+
 .pokemon-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -17,6 +21,10 @@
 
 .button {
   width: 15rem;
+}
+
+.hidden {
+  display: none;
 }
 
 @media all and (max-width: 800px) {
