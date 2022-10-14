@@ -1,6 +1,6 @@
 <h3>Pokédex App</h3>
 <p>
-Pokedéx is a small and easy to use web application. The app loads data from an external API called <a href="https://pokeapi.co/" target="_blank">"PokéAPI"</a> and enables the viewing of details of each Pokémon by click. The App uses HTML, CSS and JavaScript
+Pokedéx is a small and easy to use web application. The app loads data from an external API called <a href="https://pokeapi.co/">"PokéAPI"</a> and enables the viewing of details of each Pokémon by click. The App uses HTML, CSS and JavaScript
 
 <h3>Navigation</h3>
 Users are enabled to scroll through the list of items and click on each of them to display a modal with further information. 
