@@ -2,6 +2,23 @@
 let a24Repository = (function() {
 	let pokemonList = [];
 	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=42';
+	
+
+
+	function loadingMessage() {
+	let body = document.querySelector('body');
+	let load = document.createElement('div');
+	load.setAttribute('class', 'load');
+	let loadImg = document.createElement('img');
+	loadImg.src = 'https://www.sketchup.com/sites/www.sketchup.com/modules/license_wizard_green/images/loading.gif';
+	load.appendChild(loadImg);
+	body.appendChild(load);
+	}
+
+	function hidingMessage() {
+	let load = document.querySelector('.load');
+	load.remove();
+	}
 
 	// function for adding an item
 	function add(item) {
@@ -17,10 +34,6 @@ let a24Repository = (function() {
 		return pokemonList;
 	}
 
-	// function to find a specific pokemon
-	function findPokemon(userInput) {
-		return pokemonList.filter((item) => item.name.toLowerCase() === userInput.toLowerCase());
-	}
 	//function for creating buttons for each item including showDetails of item by click
 
 	function addListItem(item) {
@@ -53,10 +66,10 @@ let a24Repository = (function() {
 
 	//fetch data from api
 	let loadList = () => {
-		// loadingMessage();
+		loadingMessage();
 		return fetch(apiUrl)
 			.then((response) => {
-				// hidingMessage();
+				hidingMessage();
 				if (!response.ok) throw new Error(`Status Code Error: ${response.status}`);
 				return response.json();
 			})
@@ -71,22 +84,22 @@ let a24Repository = (function() {
 				});
 			})
 			.catch((e) => {
-				// hidingMessage();
+				hidingMessage();
 				console.error(e);
 			});
 	};
 
 	//function for fetching the details from detailsUrl
 	let loadDetails = (pokemon) => {
-		// loadingMessage();
 		let nextUrl = pokemon.detailsUrl;
+		
 		return fetch(nextUrl)
 			.then((response) => {
-				// hidingMessage();
 				if (!response.ok) throw new Error(`Status Code Error: ${response.status}`);
 				return response.json();
 			})
 			.then((data) => {
+				pokemon.name= data.name;
 				pokemon.id = data.id;
 				pokemon.imgUrl = data.sprites.front_default;
 				pokemon.height = data.height / 10;
@@ -95,7 +108,6 @@ let a24Repository = (function() {
 				pokemon.types = data.types.map((type) => type.type.name).join(', ');
 			})
 			.catch((e) => {
-				//hidingMessage();
 				console.error(e);
 			});
 	};
@@ -125,6 +137,40 @@ let a24Repository = (function() {
 		modalBody.append(weightElement);
 		modalBody.append(abilitiesElement);
 	}
+
+	// function hideUnmatched(){
+	// 	let listItem = document.querySelector('item.name');
+	// 	pokemonList.forEach((item,index) =>{
+	// 		let hidden = !item.name.toLowerCase().includes(searchItem.toLowerCase());
+	// 		console.log(item)
+	// 		listItem[index].classList.toggle('hidden',hidden)
+	// 	});
+	// }
+
+	let searchValue = document.getElementById('input');
+	searchValue.addEventListener('keyup', function(e) {
+		let searchString = e.target.value;
+		
+		let hiddenItems = pokemonList.filter(function(item){
+			if(!item.name.includes(searchString)){
+				return item
+			}
+		})
+		let shownItems = pokemonList.filter(function(item){
+			if(item.name.includes(searchString)){
+				return item
+			}
+		})
+	
+
+	hiddenItems.map((item) =>{
+		document.getElementById(item.name).classList.add('hidden')
+	})
+	shownItems.map((item)=>{
+		document.getElementById(item.name).classList.remove('hidden')
+	})
+})
+
 	return {
 		add: add,
 		getAll: getAll,
@@ -132,6 +178,7 @@ let a24Repository = (function() {
 		loadList: loadList,
 		loadDetails: loadDetails,
 		showModal: showModal
+	
 	};
 })();
 
