@@ -4,7 +4,7 @@ let a24Repository = (function() {
 	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=42';
 	
 
-
+	//create and append loading spinner
 	function loadingMessage() {
 	let body = document.querySelector('body');
 	let load = document.createElement('div');
@@ -15,12 +15,13 @@ let a24Repository = (function() {
 	body.appendChild(load);
 	}
 
+	//hide loading spinner
 	function hidingMessage() {
 	let load = document.querySelector('.load');
 	load.remove();
 	}
 
-	// function for adding an item
+	// add item to array
 	function add(item) {
 		if (typeof item === 'object' && 'name' in item) {
 			pokemonList.push(item);
@@ -29,23 +30,23 @@ let a24Repository = (function() {
 		}
 	}
 
-	// function to show all items
+	// get array of items
 	function getAll() {
 		return pokemonList;
 	}
 
-	//function for creating buttons for each item including showDetails of item by click
-
+	//create and buttons for each item
 	function addListItem(item) {
 		loadDetails(item).then(function() {
 			let list = document.querySelector('.pokemon-list');
 			let listItem = document.createElement('li');
 			listItem.classList.add('liItem');
 			let button = document.createElement('button');
-			button.innerText = item.name;
-			button.classList.add('button', 'btn', 'btn-outline-warning');
+			button.innerText = item.name.toUpperCase();
+			button.classList.add('myButton', 'btn', 'btn-outline-warning');
 			button.setAttribute('data-toggle', 'modal');
 			button.setAttribute('data-target', '#pokeModal');
+			button.setAttribute('id',item.name);
 			let buttonImage = document.createElement('img');
 			buttonImage.setAttribute('src', item.imgUrl);
 			button.appendChild(buttonImage);
@@ -57,6 +58,7 @@ let a24Repository = (function() {
 		});
 	}
 
+	//show details by click on button
 	function showDetails(item) {
 		loadDetails(item).then(function() {
 			console.log(item);
@@ -89,7 +91,7 @@ let a24Repository = (function() {
 			});
 	};
 
-	//function for fetching the details from detailsUrl
+	//fetch details from detailsUrl
 	let loadDetails = (pokemon) => {
 		let nextUrl = pokemon.detailsUrl;
 		
@@ -112,16 +114,17 @@ let a24Repository = (function() {
 			});
 	};
 
+		//create modal for each button
 	function showModal(item) {
 		let modalBody = $('.modal-body');
 		let modalTitle = $('.modal-title');
 		//let modalHeader = $('.modal-header');
 
-		//clear content of the modal
+		//clear content of modal
 		modalTitle.empty();
 		modalBody.empty();
 
-		//creating elements for modal content
+		//create elements for modal content
 		let idElement = $('<h5>' + '#' + item.id + '</h5>');
 		let nameElement = $('<h3>' + item.name.toUpperCase() + '</h3>');
 		let imgElement = $('<img class="modal-img" style="width:50%">');
@@ -138,36 +141,27 @@ let a24Repository = (function() {
 		modalBody.append(abilitiesElement);
 	}
 
-	// function hideUnmatched(){
-	// 	let listItem = document.querySelector('item.name');
-	// 	pokemonList.forEach((item,index) =>{
-	// 		let hidden = !item.name.toLowerCase().includes(searchItem.toLowerCase());
-	// 		console.log(item)
-	// 		listItem[index].classList.toggle('hidden',hidden)
-	// 	});
-	// }
-
+	//search list by item
 	let searchValue = document.getElementById('input');
 	searchValue.addEventListener('keyup', function(e) {
-		let searchString = e.target.value;
+		let searchString = e.target.value.toLowerCase();
 		
-		let hiddenItems = pokemonList.filter(function(item){
+		let hiddenItems = pokemonList.filter((item)=>{
 			if(!item.name.includes(searchString)){
 				return item
 			}
 		})
-		let shownItems = pokemonList.filter(function(item){
+		let shownItems = pokemonList.filter((item) =>{
 			if(item.name.includes(searchString)){
 				return item
 			}
 		})
 	
-
 	hiddenItems.map((item) =>{
-		document.getElementById(item.name).classList.add('hidden')
+		document.getElementById(item.name).classList.add('hidden');
 	})
 	shownItems.map((item)=>{
-		document.getElementById(item.name).classList.remove('hidden')
+		document.getElementById(item.name).classList.remove('hidden');
 	})
 })
 
