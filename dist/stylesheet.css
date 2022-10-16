@@ -1,0 +1,29 @@
+.pokemon-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+* {
+  box-sizing: border-box;
+}
+.page-container {
+  margin-top: 60px;
+}
+.liItem {
+  padding: 5px;
+}
+.myButton {
+  width: 15rem;
+}
+.hidden {
+  display: none;
+}
+@media all and (max-width: 800px) {
+  .pokemon-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media all and (max-width: 530px) {
+  .pokemon-list {
+    grid-template-columns: 1fr;
+  }
+}
