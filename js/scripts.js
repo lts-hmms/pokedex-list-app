@@ -39,19 +39,16 @@ let pokedex = (function() {
 	function addListItem(item) {
 		loadDetails(item).then(function() {
 			let list = document.querySelector('.pokemon-list');
-			let listItem = document.createElement('li');
-			listItem.classList.add('liItem');
 			let button = document.createElement('button');
 			button.innerText = item.name.toUpperCase();
-			button.classList.add('myButton', 'btn', 'btn-outline-warning');
+			button.classList.add('myButton', 'btn');
 			button.setAttribute('data-toggle', 'modal');
 			button.setAttribute('data-target', '#pokeModal');
-			button.setAttribute('id',item.name);
+			button.setAttribute('id',item.name,'pokemon-title');
 			let buttonImage = document.createElement('img');
 			buttonImage.setAttribute('src', item.imgUrl);
 			button.appendChild(buttonImage);
-			listItem.appendChild(button);
-			list.appendChild(listItem);
+			list.appendChild(button);
 			button.addEventListener('click', function() {
 				showDetails(item);
 			});
