@@ -1,11 +1,6 @@
-.pokemon-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+body {
+  background-color: #ece;
 }
-
-/* body {
-  padding-top: 60px;
-} */
 
 * {
   box-sizing: border-box;
@@ -15,18 +10,34 @@
   margin-top: 80px;
 }
 
-.liItem {
-  padding: 5px;
+.pokemon-list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .myButton {
-  width: 15rem;
+  background-color: #f8f9fa;
+  border-radius: 3px;
+  width: 250px;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 7px 10px 12px -5px rgba(0, 0, 0, 0.56);
 }
 
 .hidden {
   display: none;
 }
 
+img:hover {
+  transform: scale(1.5);
+}
+
+.modal-body {
+  text-align: center;
+}
+
+/* Navbar not overlapping body */
 @media (max-width: 991px) {
   body {
     padding-top: 80px;
