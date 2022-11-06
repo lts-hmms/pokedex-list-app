@@ -1,5 +1,5 @@
 //IIFE
-let a24Repository = (function() {
+let pokedex = (function() {
 	let pokemonList = [];
 	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=42';
 	
@@ -176,9 +176,9 @@ let a24Repository = (function() {
 	};
 })();
 
-a24Repository.loadList().then(function() {
+pokedex.loadList().then(function() {
 	// Now the data is loaded!
-	a24Repository.getAll().forEach(function(pokemon) {
-		a24Repository.addListItem(pokemon);
+	pokedex.getAll().forEach(function(pokemon) {
+		pokedex.addListItem(pokemon);
 	});
 });
