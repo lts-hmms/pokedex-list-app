@@ -1,5 +1,6 @@
 {
   "extends": ["wesbos"],
+  "ignorePatterns": ["**/dist/*.js", "**/dist/*.css"],
   "rules": {
     "no-console": 2,
     "prettier/prettier": [
