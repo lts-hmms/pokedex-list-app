@@ -12,7 +12,7 @@
 <table width="100%" style="overflow:auto">
   <tr>
     <td width="50%" style="text-align:center;"><img src="./docs/pokédex1.png"/></td>
-    <td width="50%" style="text-align:center;"><img src="./docs/pokédex2.png""/></td>
+    <td width="50%" style="text-align:center;"><img src="./docs/pokédex2.png"/></td>
   </tr>
 </table>
 
@@ -30,4 +30,4 @@ The App gets its information by an API called [Pokéapi](https://pokeapi.co/).
 
 ## Run the Project
 
-Watch it live in action [here](https://lts-hmms.github.io/pokedex-list-app/) or download the Code and open the index.html file in your browser.
+Watch it live in action [here](https://lts-hmms.github.io/pokedex-list-app/) or download the Code and open the `index.html` file in your browser.
