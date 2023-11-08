@@ -30,4 +30,4 @@ The App gets its information by an API called [Pokéapi](https://pokeapi.co/).
 
 ## Run the Project
 
-Watch it live in action [here](https://lts-hmms.github.io/pokedex-list-app/) or download the Code and open the `index.html` file in your browser.
+Watch it live in action [here](https://lts-hmms.github.io/pokedex-list-app/) (i am aware of the phishing alert and i am on it) or download the Code and open the `index.html` file in your browser.
